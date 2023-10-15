@@ -1,0 +1,102 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "url": "https://raw.githubusercontent.com/v0za/FIT3179/main/files/data/combined_formatted.csv"
+    },
+    "width": "container",
+    "height": 400,
+    "layer": [
+      {
+        "mark": { "type": "line", "interpolate": "monotone" },
+        "encoding": {
+          "x": {
+            "field": "Year",
+            "type": "ordinal",
+            "axis": {
+              "title": "Year",
+              "labelAngle": 0,
+              "values": ["2020", "2021", "2022", "2023"]
+            }
+          },
+          "y": {
+            "field": "Rank",
+            "type": "quantitative",
+            "axis": {
+              "title": "Rank",
+              "tickCount": 10,
+              "values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            "scale": { "reverse": true }
+          },
+          "color": {
+            "field": "Country",
+            "type": "nominal",
+            "legend": null,
+            "scale": {
+              "domain": [
+                "India",
+                "South Africa",
+                "Malaysia",
+                "Egypt",
+                "Indonesia",
+                "Philippines",
+                "Morocco",
+                "Vietnam",
+                "Tunisia",
+                "Kenya"
+              ],
+              "range": [
+                  "#1f77b4",
+                  "#ff7f0e",
+                  "#2ca02c",
+                  "#d62728",
+                  "#9467bd",
+                  "#8c564b",
+                  "#e377c2",
+                  "#7f7f7f",
+                  "#bcbd22",
+                  "#17becf"
+              ]
+            }
+          },
+          "tooltip": [
+            { "field": "Country", "title": "Country" },
+            { "field": "Continent", "title": "Continent" },
+            { "field": "Year", "title": "Year" },
+            { "field": "Rank", "title": "Rank" }
+          ]
+        }
+      },
+      {
+        "mark": "circle",
+        "encoding": {
+          "x": { "field": "time", "type": "ordinal" },
+          "y": {
+            "field": "rank",
+            "type": "quantitative",
+            "scale": { "reverse": false }
+          },
+          "color": { "field": "category", "type": "nominal" }
+        }
+      },
+      {
+        "mark": { "type": "point", "filled": true },
+        "encoding": {
+          "x": { "field": "Year", "type": "ordinal" },
+          "y": {
+            "field": "Rank",
+            "type": "quantitative",
+            "scale": { "reverse": true }
+          },
+          "color": { "field": "Country", "type": "nominal" },
+          "tooltip": [
+            { "field": "Country", "title": "Country" },
+            { "field": "Continent", "title": "Continent" },
+            { "field": "Year", "title": "Year" },
+            { "field": "Rank", "title": "Rank" }
+          ]
+        }
+      }
+    ]
+  }
+  

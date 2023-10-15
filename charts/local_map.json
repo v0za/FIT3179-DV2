@@ -1,0 +1,87 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "style": {
+      "cell": {
+        "stroke": "transparent"
+      }
+    }
+  },
+  "width": "container",
+  "height": 400,
+  
+  "projection": {
+    "type": "equalEarth"
+  },
+
+
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/v0za/FIT3179/main/files/js/countries_topo.json",
+    "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+  },
+  
+
+  "layer": [
+    
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/v0za/FIT3179/main/files/js/ocean_topo.json",
+        "format": {"type": "topojson", "feature": "oceans"}
+      },
+      "mark": {"type": "geoshape", "fill": "skyblue"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/v0za/FIT3179/main/files/js/graticules_topo.json",
+        "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+      },
+      "mark": {"type": "geoshape", "fill": null, "stroke": "white"}
+    },
+    {
+      "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "black"}
+    },
+
+
+    {
+      "transform": [
+        {
+          "lookup": "properties.NAME",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/v0za/FIT3179/main/files/data/map.csv",
+              "format": {"type": "csv"}
+            },
+            "key": "Country",
+            "fields": ["Percentage"]
+          }
+        },
+        {"calculate": "datum['Percentage']", "as": "percentage"}
+      ],
+      "mark": {"type": "geoshape", "stroke": "black"},
+      "encoding": {
+        "color": {
+          "field": "percentage",
+          "title": "PERCENTAGE OF POPULATION",
+          "type": "quantitative",
+
+          "scale": {"type": "threshold",
+                    "domain": [10, 20, 30, 40, 50, 60]
+                    },
+          "legend": {
+            "orient": "none",
+            "legendX": 270,
+            "legendY": 390,
+            "direction": "horizontal",
+            "titleAnchor": "middle"
+          }
+        },
+        "tooltip": [
+          {"field": "properties.NAME", "type": "nominal", "title": "Country:"},
+          {"field": "percentage", "type": "quantitative", "title": "Percent of Population: "}
+        ]
+      }
+    }   
+    
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "config": {
+      "style": {
+        "cell": {
+          "stroke": "transparent"
+        }
+      }
+    },
+  "data": {"url": "https://raw.githubusercontent.com/v0za/FIT3179/main/files/data/data.csv"},
+
+  "vconcat": [
+    {
+      "width": 835,
+      "height": 300,
+      "mark": "area",
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "temporal",
+          "scale": {"domain": {"param": "brush"}},
+          "axis": {
+            "labelAngle": 0,
+            "tickCount": 5,
+            "title": null
+          }
+        },
+        "y": {
+          "field": "Amount",
+          "type": "quantitative",
+          "title": "Children (Millions)"
+        },
+        "color": {
+          "field": "Continent",
+          "scale": {"range": ["#67C2E7", "#5A8F87", "#FFB03B", "#A26760", "#FF99C9", "#A366A2", "#8E8E8E", "#5A8F87", "#E87E7E", "#9B71A0"]},
+          "legend": null
+        },
+        "tooltip": [
+          {"field": "Continent", "type": "nominal", "title": "Continent:"},
+          {"field": "Year", "type": "temporal", "timeUnit": "year", "title": "Year:"},
+          {"field": "Amount", "type": "quantitative", "title": "Children (Millions): "}
+        ]
+      }
+    },
+
+    {
+      "width":835,
+      "height": 60,
+      "mark": "area",
+      "params": [
+        {"name": "brush", "select": {"type": "interval", "encodings": ["x"]}}
+      ],
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "temporal",
+          "axis": {
+            "labelAngle": 0,
+            "tickCount": 5
+          },
+          "title": "Year"
+        },
+        "y": {
+          "field": "Amount",
+          "type": "quantitative",
+          "title": "Children (Millions)"
+        },
+        "color": {
+          "field": "Continent",
+          "legend": null
+        }
+      }
+    }
+  ]
+}
